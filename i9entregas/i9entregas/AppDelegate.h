@@ -16,4 +16,7 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UINavigationController *navigationController;
 
+- (void)setGrayBgDarkBorder:(id)sender;
+- (void)setPadding:(UITextField*)textField;
+
 @end

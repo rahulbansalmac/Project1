@@ -12,6 +12,8 @@
 #import "ASIFormDataRequest.h"
 #import "MBProgressHUD.h"
 
+@class AppDelegate;
+
 @interface SignUpViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 {
     // Driver View
@@ -19,6 +21,16 @@
 
     IBOutlet UIButton *_btnDDriver;
     IBOutlet UIButton *_btnDCustomer;
+    IBOutlet UIButton *_btnAddVehicles;
+    
+    IBOutlet UITextField *_tfDCNHNumber;
+    IBOutlet UITextField *_tfDUF;
+    IBOutlet UITextField *_tfRG;
+    IBOutlet UITextField *_tfANTTNumber;
+    
+    IBOutlet UIImageView *_imgvAddVehicles;
+    
+    IBOutlet UIView *_viewDSubmit;
     
     // Customer View
     IBOutlet UIScrollView *_scrollViewCustomer;
@@ -51,8 +63,10 @@
     NSMutableArray *arrCarrier;
     UIAlertView *alertClear;
     
+    AppDelegate *appd;
     MBProgressHUD *hud;
     ASIFormDataRequest *requestRegisterCustomer;
+    NSMutableArray *arrTotalVehicles;
 }
 
 - (IBAction)actionDriverSelected:(id)sender;
@@ -62,5 +76,6 @@
 - (IBAction)actionSubmit:(id)sender;
 - (IBAction)actionCarrierPickerCancel:(id)sender;
 - (IBAction)actionCarrierPickerDone:(id)sender;
+- (IBAction)actionAddVehicles:(id)sender;
 
 @end

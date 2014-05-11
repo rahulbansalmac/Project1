@@ -52,4 +52,39 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void)setGrayBgDarkBorder:(id)sender
+{
+    if ([sender isKindOfClass:[UITextField class]])
+    {
+        UITextField *tf = (UITextField*)sender;
+        
+        tf.backgroundColor = [UIColor colorWithRed:229.0/255.0 green:230.0/255.0 blue:232.0/255.0 alpha:1.0];
+        tf.layer.borderColor = [[UIColor colorWithRed:219.0/255.0 green:219.0/255.0 blue:219.0/255.0 alpha:1.0] CGColor];
+        tf.layer.borderWidth = 1.0f;
+        tf.layer.cornerRadius = 3.0f;
+    }
+    else if ([sender isKindOfClass:[UIImageView class]])
+    {
+        UIImageView *imgv = (UIImageView*)sender;
+        
+        imgv.layer.borderColor = [[UIColor colorWithRed:219.0/255.0 green:219.0/255.0 blue:219.0/255.0 alpha:1.0] CGColor];
+        imgv.layer.borderWidth = 1.0f;
+        imgv.layer.cornerRadius = 3.0f;
+    }
+    else if ([sender isKindOfClass:[UIView class]])
+    {
+        UIView *view = (UIView*)sender;
+        view.layer.borderColor = [[UIColor colorWithRed:219.0/255.0 green:219.0/255.0 blue:219.0/255.0 alpha:1.0] CGColor];
+        view.layer.borderWidth = 1.0f;
+        view.layer.cornerRadius = 3.0f;
+    }
+}
+
+- (void)setPadding:(UITextField*)textField
+{
+    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 7, 20)];
+    textField.leftView = paddingView;
+    textField.leftViewMode = UITextFieldViewModeAlways;
+}
+
 @end

@@ -28,8 +28,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self setPadding:_tfEmail];
-    [self setPadding:_tfPassword];
+    appd = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    [appd setPadding:_tfEmail];
+    [appd setPadding:_tfPassword];
+    
+    [appd setGrayBgDarkBorder:_tfEmail];
+    [appd setGrayBgDarkBorder:_tfPassword];
     
     _btnLogin.layer.cornerRadius = 3.0f;
     _btnSignup.layer.cornerRadius = 3.0f;
@@ -50,6 +55,9 @@
 
 - (IBAction)actionLogin:(id)sender
 {
+    HomeViewController *homevc = [[HomeViewController alloc] init];
+    [self.navigationController pushViewController:homevc animated:YES];
+/*
     [activeTextField resignFirstResponder];
     
     if ([_tfEmail.text isEqualToString:@""] || [_tfPassword.text isEqualToString:@""])
@@ -72,18 +80,12 @@
     }
     else
         [self runAPILogin];
+ */
 }
 
 - (IBAction)actionForgotPassword:(id)sender
 {
     
-}
-
-- (void)setPadding:(UITextField*)textField
-{
-    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 7, 20)];
-    textField.leftView = paddingView;
-    textField.leftViewMode = UITextFieldViewModeAlways;
 }
 
 - (BOOL)validateEmailWithString:(NSString*)email1
@@ -137,7 +139,7 @@
         [hud show:YES];
     else
         hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.detailsLabelText = @"Logging In";
+    hud.detailsLabelText = @"Logging In...";
     requestLogin = [[ASIFormDataRequest alloc] initWithURL:[NSURL URLWithString:str]];
     [requestLogin setPostValue:_tfEmail.text forKey:@"email"];
     [requestLogin setPostValue:_tfPassword.text forKey:@"password"];

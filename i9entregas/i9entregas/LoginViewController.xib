@@ -22,10 +22,6 @@
                     <rect key="frame" x="76" y="60" width="169" height="85"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="text_box.png" id="7lV-xT-PkR">
-                    <rect key="frame" x="18" y="173" width="284" height="41"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" minimumFontSize="17" clearButtonMode="whileEditing" id="dhF-Lh-mrg">
                     <rect key="frame" x="18" y="173" width="284" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -35,10 +31,6 @@
                         <outlet property="delegate" destination="-1" id="aaS-jE-cjM"/>
                     </connections>
                 </textField>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="text_box.png" id="SSn-y2-n4w">
-                    <rect key="frame" x="18" y="222" width="284" height="41"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" id="kWN-ee-9Ra">
                     <rect key="frame" x="18" y="222" width="284" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -97,6 +89,5 @@
     <resources>
         <image name="logo.png" width="169" height="85"/>
         <image name="or.png" width="24" height="25"/>
-        <image name="text_box.png" width="284" height="41"/>
     </resources>
 </document>

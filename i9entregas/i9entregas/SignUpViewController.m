@@ -28,10 +28,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    appd = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    
     [[IQKeyboardManager sharedManager] setEnable:YES];
+
+    self.navigationItem.title = @"Sign Up";
+
+    self.automaticallyAdjustsScrollViewInsets = NO;
 
     self.navigationController.navigationBar.topItem.title = @"Back";
     self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.translucent = YES;
     
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:107.0/255.0 green:112.0/255.0 blue:115.0/255.0 alpha:1.0];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:247.0/255.0 green:247.0/255.0 blue:247.0/255.0 alpha:1.0];
@@ -39,10 +46,21 @@
     
     for (int i = 0; i < 14; i++)
     {
-        UITextField *tf = (UITextField*)[self.view viewWithTag:i + 1];
-        [self setPadding:tf];
+        UITextField *tf = (UITextField*)[_scrollViewCustomer viewWithTag:i + 1];
+        [appd setGrayBgDarkBorder:tf];
+        [appd setPadding:tf];
     }
-    [self setPadding:_tfCarrier];
+    
+    for (int i = 0; i < 7; i++)
+    {
+        UITextField *tf = (UITextField*)[_scrollViewDriver viewWithTag:i + 1];
+        [appd setGrayBgDarkBorder:tf];
+        [appd setPadding:tf];
+    }
+    
+    [appd setGrayBgDarkBorder:_tfCarrier];
+    
+    [appd setPadding:_tfCarrier];
 
     [self initializeComponents];
     
@@ -54,8 +72,10 @@
     [self.view addSubview:_scrollViewDriver];
     [self.view addSubview:_scrollViewCustomer];
     
+    _scrollViewCustomer.hidden = YES;
+    
     _scrollViewDriver.frame = CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height);
-    _scrollViewDriver.contentSize = CGSizeMake(_scrollViewDriver.contentSize.width, _btnSubmit.frame.origin.y + _btnSubmit.frame.size.height + 10);
+    _scrollViewDriver.contentSize = CGSizeMake(_scrollViewDriver.contentSize.width, _viewDSubmit.frame.origin.y + _viewDSubmit.frame.size.height + 10);
     
     _scrollViewCustomer.frame = CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height);
     _scrollViewCustomer.contentSize = CGSizeMake(_scrollViewCustomer.contentSize.width, _btnSubmit.frame.origin.y + _btnSubmit.frame.size.height + 10);
@@ -74,23 +94,27 @@
     
     _btnClear.layer.cornerRadius = 3.0f;
     _btnSubmit.layer.cornerRadius = 3.0f;
+    
+    [appd setGrayBgDarkBorder:_imgvAddVehicles];
 }
 
 - (void)initializeVariables
 {
+    arrTotalVehicles = [[NSMutableArray alloc] init];
+    
     arrCarrier = [[NSMutableArray alloc] initWithObjects:@"Aircel",@"Airtel", nil];
 }
 
 - (IBAction)actionDriverSelected:(id)sender
 {
-    _scrollViewDriver.hidden = NO;
     _scrollViewCustomer.hidden = YES;
+    _scrollViewDriver.hidden = NO;
 }
 
 - (IBAction)actionCustomerSelected:(id)sender
 {
-    _scrollViewCustomer.hidden = NO;
     _scrollViewDriver.hidden = YES;
+    _scrollViewCustomer.hidden = NO;
 }
 
 - (IBAction)actionClear:(id)sender
@@ -176,11 +200,99 @@
     _tfCarrier.text = [arrCarrier objectAtIndex:[_pickerCarrier selectedRowInComponent:0]];
 }
 
-- (void)setPadding:(UITextField*)textField
+- (IBAction)actionAddVehicles:(id)sender
 {
-    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 7, 20)];
-    textField.leftView = paddingView;
-    textField.leftViewMode = UITextFieldViewModeAlways;
+    [arrTotalVehicles addObject:@"Vehicle Added"];
+    
+    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"View" owner:self options:nil];
+    UIView *_viewVehicle = (UIView*)[arr objectAtIndex:0];
+    _viewVehicle.tag = 1000 + (arrTotalVehicles.count - 1);
+    _viewVehicle.frame = CGRectMake(18, _btnAddVehicles.frame.origin.y + _btnAddVehicles.frame.size.height + (arrTotalVehicles.count - 1) * _viewVehicle.frame.size.height , _viewVehicle.frame.size.width, _viewVehicle.frame.size.height);
+    [appd setGrayBgDarkBorder:_viewVehicle];
+    [_scrollViewDriver addSubview:_viewVehicle];
+    
+    _viewDSubmit.frame = CGRectMake(_viewDSubmit.frame.origin.x, _viewVehicle.frame.origin.y + _viewVehicle.frame.size.height + 10, _viewDSubmit.frame.size.width, _viewDSubmit.frame.size.height);
+    
+    _scrollViewDriver.contentSize = CGSizeMake(_scrollViewDriver.contentSize.width, _viewDSubmit.frame.origin.y + _viewDSubmit.frame.size.height + 10);
+    
+    CGPoint bottomOffset = CGPointMake(0, _scrollViewDriver.contentSize.height - _scrollViewDriver.bounds.size.height);
+    [_scrollViewDriver setContentOffset:bottomOffset animated:YES];
+    
+    
+    UILabel *_lblVehicleNo = (UILabel*)[_viewVehicle viewWithTag:1];
+    UITextField *_tfVehicleBrand = (UITextField*)[_viewVehicle viewWithTag:2];
+    UIButton *_btnVehicleBrand = (UIButton*)[_viewVehicle viewWithTag:3];
+    UITextField *_tfVehicleModal = (UITextField*)[_viewVehicle viewWithTag:4];
+    UIButton *_btnVehicleModal = (UIButton*)[_viewVehicle viewWithTag:5];
+    UITextField *_tfYOM = (UITextField*)[_viewVehicle viewWithTag:6];
+    UIButton *_btnYOM = (UIButton*)[_viewVehicle viewWithTag:7];
+    UITextField *_tfLP1 = (UITextField*)[_viewVehicle viewWithTag:8];
+    UITextField *_tfLP2 = (UITextField*)[_viewVehicle viewWithTag:9];
+    UITextField *_tfVolumeTotal = (UITextField*)[_viewVehicle viewWithTag:10];
+    UITextField *_tfPesoTotal = (UITextField*)[_viewVehicle viewWithTag:11];
+    UIButton *_btnVechicleRemove = (UIButton*)[_viewVehicle viewWithTag:12];
+
+    _lblVehicleNo.text = [NSString stringWithFormat:@"Vehicle %d",arrTotalVehicles.count];
+    
+    [appd setPadding:_tfVehicleBrand];
+    [appd setPadding:_tfVehicleModal];
+    [appd setPadding:_tfYOM];
+    [appd setPadding:_tfLP1];
+    [appd setPadding:_tfLP2];
+    [appd setPadding:_tfVolumeTotal];
+    [appd setPadding:_tfPesoTotal];
+    
+    [appd setGrayBgDarkBorder:_tfVehicleBrand];
+    [appd setGrayBgDarkBorder:_tfVehicleModal];
+    [appd setGrayBgDarkBorder:_tfYOM];
+    [appd setGrayBgDarkBorder:_tfLP1];
+    [appd setGrayBgDarkBorder:_tfLP2];
+    [appd setGrayBgDarkBorder:_tfVolumeTotal];
+    [appd setGrayBgDarkBorder:_tfPesoTotal];
+    
+    [_btnVechicleRemove addTarget:self action:@selector(actionRemoveVehicleView:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)actionRemoveVehicleView:(id)sender
+{
+    UIView *vw = (UIView*)[sender superview];
+    [arrTotalVehicles removeObjectAtIndex:vw.tag-1000];
+    
+    [self performSelector:@selector(removefrmSuperview:) withObject:vw afterDelay:0.2];
+}
+
+- (void)removefrmSuperview:(UIView*)vw
+{
+    [vw removeFromSuperview];
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDuration:0.2];
+    for(UIView *view in [_scrollViewDriver subviews])
+    {
+        if(view.tag > vw.tag)
+        {
+            view.tag = view.tag - 1;
+            [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y - view.frame.size.height, view.frame.size.width, view.frame.size.height)];
+        }
+    }
+    [UIView commitAnimations];
+        
+    if (arrTotalVehicles.count > 0)
+    {
+        [self performSelector:@selector(adjustScrollView) withObject:Nil afterDelay:0.2];
+    }
+    else
+    {
+        _viewDSubmit.frame = CGRectMake(_viewDSubmit.frame.origin.x, _imgvAddVehicles.frame.origin.y + _imgvAddVehicles.frame.size.height + 10, _viewDSubmit.frame.size.width, _viewDSubmit.frame.size.height);
+        _scrollViewDriver.contentSize = CGSizeMake(_scrollViewDriver.contentSize.width, _viewDSubmit.frame.origin.y + _viewDSubmit.frame.size.height + 10);
+    }
+}
+
+- (void)adjustScrollView
+{
+    UIView *view1 = [_scrollViewDriver viewWithTag:1000+(arrTotalVehicles.count-1)];
+    _viewDSubmit.frame = CGRectMake(_viewDSubmit.frame.origin.x, view1.frame.origin.y + view1.frame.size.height + 10, _viewDSubmit.frame.size.width, _viewDSubmit.frame.size.height);
+    _scrollViewDriver.contentSize = CGSizeMake(_scrollViewDriver.contentSize.width, _viewDSubmit.frame.origin.y + _viewDSubmit.frame.size.height + 5);
 }
 
 - (BOOL)validateEmailWithString:(NSString*)email1
