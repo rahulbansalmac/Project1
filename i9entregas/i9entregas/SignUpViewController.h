@@ -67,6 +67,7 @@
     MBProgressHUD *hud;
     ASIFormDataRequest *requestRegisterCustomer;
     NSMutableArray *arrTotalVehicles;
+    UIAlertView *_alertSuccess;
 }
 
 - (IBAction)actionDriverSelected:(id)sender;

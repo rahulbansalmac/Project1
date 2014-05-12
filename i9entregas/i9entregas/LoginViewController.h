@@ -32,6 +32,5 @@
 - (IBAction)actionSignUp:(id)sender;
 - (IBAction)actionLogin:(id)sender;
 - (IBAction)actionForgotPassword:(id)sender;
-- (IBAction)actionNewScreen:(id)sender;
 
 @end

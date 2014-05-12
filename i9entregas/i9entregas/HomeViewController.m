@@ -40,11 +40,12 @@
 - (IBAction)actionOpenRequest:(id)sender
 {
     OpenRequestViewController *openreq = [[OpenRequestViewController alloc] init];
-
-    _revealSideViewController = [[PPRevealSideViewController alloc] initWithRootViewController:openreq];
+    [self.navigationController pushViewController:openreq animated:YES];
     
-    AppDelegate *appd = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    appd.window.rootViewController = _revealSideViewController;
+//    _revealSideViewController = [[PPRevealSideViewController alloc] initWithRootViewController:openreq];
+    
+//    AppDelegate *appd = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//    appd.window.rootViewController = _revealSideViewController;
 }
 
 - (IBAction)actionMyRequest:(id)sender

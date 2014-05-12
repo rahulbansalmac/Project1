@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "PPRevealSideViewController.h"
+#import "ASIFormDataRequest.h"
+#import "MBProgressHUD.h"
+#import "AppDelegate.h"
 
 @interface OpenRequestViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
@@ -15,5 +18,7 @@
     IBOutlet UITextField *_tfSearch;
     
     PPRevealSideViewController *_revealSideViewController;
+    MBProgressHUD *hud;
+    ASIFormDataRequest *requestGetRequest;
 }
 @end

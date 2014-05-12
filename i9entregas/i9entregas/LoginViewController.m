@@ -28,6 +28,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    _tfEmail.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"email"];
+    _tfPassword.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
+    
     appd = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
     [appd setPadding:_tfEmail];
@@ -55,9 +58,6 @@
 
 - (IBAction)actionLogin:(id)sender
 {
-    HomeViewController *homevc = [[HomeViewController alloc] init];
-    [self.navigationController pushViewController:homevc animated:YES];
-/*
     [activeTextField resignFirstResponder];
     
     if ([_tfEmail.text isEqualToString:@""] || [_tfPassword.text isEqualToString:@""])
@@ -80,7 +80,6 @@
     }
     else
         [self runAPILogin];
- */
 }
 
 - (IBAction)actionForgotPassword:(id)sender
@@ -166,7 +165,13 @@
     }
     else
     {
+        [[NSUserDefaults standardUserDefaults] setObject:[json valueForKey:@"message"] forKey:@"userID"];
+        [[NSUserDefaults standardUserDefaults] setObject:_tfEmail.text forKey:@"email"];
+        [[NSUserDefaults standardUserDefaults] setObject:_tfPassword.text forKey:@"password"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
+        HomeViewController *homevc = [[HomeViewController alloc] init];
+        [self.navigationController pushViewController:homevc animated:YES];
     }
 }
 

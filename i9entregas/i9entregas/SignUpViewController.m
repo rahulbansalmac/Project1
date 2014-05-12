@@ -53,7 +53,7 @@
     
     for (int i = 0; i < 7; i++)
     {
-        UITextField *tf = (UITextField*)[_scrollViewDriver viewWithTag:i + 1];
+        UITextField *tf = (UITextField*)[_scrollViewDriver viewWithTag:i + 21];
         [appd setGrayBgDarkBorder:tf];
         [appd setPadding:tf];
     }
@@ -103,6 +103,9 @@
     arrTotalVehicles = [[NSMutableArray alloc] init];
     
     arrCarrier = [[NSMutableArray alloc] initWithObjects:@"Aircel",@"Airtel", nil];
+    
+    _pickerCarrier.delegate = self;
+    _pickerCarrier.dataSource = self;
 }
 
 - (IBAction)actionDriverSelected:(id)sender
@@ -128,7 +131,7 @@
     for (int i = 0; i < 14; i++)
     {
         UITextField *tf = (UITextField*)[self.view viewWithTag:i + 1];
-        
+        NSLog(@"%@",tf.text);
         if ([tf.text isEqualToString:@""])
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Please provide all the data"  delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -360,8 +363,8 @@
         {
             NSLog(@"Success");
             
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[json valueForKey:@"message"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
+            _alertSuccess = [[UIAlertView alloc] initWithTitle:nil message:[json valueForKey:@"message"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [_alertSuccess show];
         }
     }
 }
@@ -483,6 +486,13 @@
                 tf.text = @"";
             }
             _tfCarrier.text = @"";
+        }
+    }
+    else if ([alertView isEqual:_alertSuccess])
+    {
+        if (buttonIndex == 1)
+        {
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }
     }
 }

@@ -115,7 +115,7 @@
                     <rect key="frame" x="18" y="315" width="284" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="qzd-Sw-HuE"/>
                     </connections>
@@ -337,7 +337,7 @@
                         <action selector="actionCustomerSelected:" destination="-1" eventType="touchUpInside" id="Cuk-za-gTx"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Please Enter Your CNH Number" minimumFontSize="17" clearButtonMode="whileEditing" id="ewb-hC-Dl9">
+                <textField opaque="NO" clipsSubviews="YES" tag="21" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Please Enter Your CNH Number" minimumFontSize="17" clearButtonMode="whileEditing" id="ewb-hC-Dl9">
                     <rect key="frame" x="18" y="266" width="284" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -355,7 +355,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.84313725490000002" green="0.84705882349999995" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="UF" minimumFontSize="17" clearButtonMode="whileEditing" id="Lfa-hP-jOi">
+                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="22" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="UF" minimumFontSize="17" clearButtonMode="whileEditing" id="Lfa-hP-jOi">
                     <rect key="frame" x="18" y="315" width="100" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -384,7 +384,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.84313725490000002" green="0.84705882349999995" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CNH Validate" minimumFontSize="17" clearButtonMode="whileEditing" id="vlp-hL-uxl">
+                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="23" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CNH Validate" minimumFontSize="17" clearButtonMode="whileEditing" id="vlp-hL-uxl">
                     <rect key="frame" x="172" y="315" width="130" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -404,7 +404,7 @@
                         <action selector="actionCarrierPickerOpen:" destination="-1" eventType="touchUpInside" id="xpA-zH-mY1"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="RG" minimumFontSize="17" clearButtonMode="whileEditing" id="Xia-qJ-gSF">
+                <textField opaque="NO" clipsSubviews="YES" tag="24" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="RG" minimumFontSize="17" clearButtonMode="whileEditing" id="Xia-qJ-gSF">
                     <rect key="frame" x="18" y="364" width="284" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -413,7 +413,7 @@
                         <outlet property="delegate" destination="-1" id="U6Q-b1-QYZ"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" id="Sfu-mG-sIS">
+                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="25" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" id="Sfu-mG-sIS">
                     <rect key="frame" x="18" y="413" width="130" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <string key="placeholder" base64-UTF8="YES">
@@ -445,7 +445,7 @@ VUYgRXhwZWRpw6fDo28AA
                         <action selector="actionCarrierPickerOpen:" destination="-1" eventType="touchUpInside" id="eDV-MB-RpT"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Borning Date" minimumFontSize="17" clearButtonMode="whileEditing" id="oMA-OD-YIO">
+                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="26" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Borning Date" minimumFontSize="17" clearButtonMode="whileEditing" id="oMA-OD-YIO">
                     <rect key="frame" x="172" y="413" width="130" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -474,7 +474,7 @@ VUYgRXhwZWRpw6fDo28AA
                         <action selector="actionCarrierPickerOpen:" destination="-1" eventType="touchUpInside" id="xzw-Gt-HLm"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Please Enter Your ANTT Number" minimumFontSize="17" clearButtonMode="whileEditing" id="7Y7-h8-Vav">
+                <textField opaque="NO" clipsSubviews="YES" tag="27" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Please Enter Your ANTT Number" minimumFontSize="17" clearButtonMode="whileEditing" id="7Y7-h8-Vav">
                     <rect key="frame" x="18" y="462" width="284" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>

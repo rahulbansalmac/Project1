@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ASIFormDataRequest.h"
+#import "MBProgressHUD.h"
+#import "AppDelegate.h"
 
 @interface ProfileViewController : UIViewController
-
+{
+    MBProgressHUD *hud;
+    ASIFormDataRequest *requestGetData;
+}
 @end

@@ -28,7 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.hidesBackButton = NO;
     self.navigationItem.title = @"Open Request";
     self.navigationController.navigationBarHidden = NO;
     self.navigationController.navigationBar.translucent = YES;
@@ -36,8 +36,79 @@
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:107.0/255.0 green:112.0/255.0 blue:115.0/255.0 alpha:1.0];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:247.0/255.0 green:247.0/255.0 blue:247.0/255.0 alpha:1.0];
     
+    [self createCustomRightBarButton];
+    
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    
+    [self runAPIGetRequest];
+}
+
+- (void)createCustomRightBarButton
+{
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.titleLabel.numberOfLines = 0;
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    button.titleLabel.textAlignment = NSTextAlignmentRight;
+    button.titleLabel.font = [UIFont systemFontOfSize:13.0f];
+    [button setTitle:NSLocalizedString(@"New\nRequest", nil) forState:UIControlStateNormal];
+    [button sizeToFit];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+}
+
+- (void)flipView
+{
+    
+}
+
+#pragma mark - API Implementation
+
+- (void)runAPIGetRequest
+{
+    if (hud)
+        [hud show:YES];
+    else
+        hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    hud.detailsLabelText = @"Loading...";
+    
+    NSString *str = [NSString stringWithFormat:@"%@get_request_customer",API];
+    requestGetRequest = [[ASIFormDataRequest alloc] initWithURL:[NSURL URLWithString:str]];
+    [requestGetRequest setPostValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"userID"] forKey:@"userid"];
+    [requestGetRequest setDelegate:self];
+    [requestGetRequest setTimeOutSeconds:200];
+    [requestGetRequest setNumberOfTimesToRetryOnTimeout:2];
+    [requestGetRequest startAsynchronous];
+}
+
+#pragma mark - ASIHTTPRequest Delegate
+
+- (void) requestFinished:(ASIHTTPRequest *)request
+{
+    [hud hide:YES];
+    
+    NSLog(@"%@",[request responseString]);
+    
+    NSDictionary* json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
+    
+    if ([[json valueForKey:@"success"] integerValue] == 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[json valueForKey:@"message"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
+    else
+    {
+        
+    }
+}
+
+- (void) requestFailed:(ASIHTTPRequest *)request
+{
+    [hud hide:YES];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Failed to connect to Internet" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 #pragma mark - Table view data source
