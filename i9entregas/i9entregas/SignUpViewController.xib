@@ -73,16 +73,16 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="979"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" id="3Lf-zP-zxo">
-                    <rect key="frame" x="76" y="84" width="169" height="85"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headerLogo.png" id="Ac9-gn-PUb">
+                    <rect key="frame" x="77" y="84" width="167" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="LEg-OW-R9b">
-                    <rect key="frame" x="50" y="206" width="110" height="30"/>
+                    <rect key="frame" x="59" y="206" width="101" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <state key="normal" title="Driver">
+                    <state key="normal" backgroundImage="driver.png">
                         <color key="titleColor" red="0.31764705879999999" green="0.37254901959999998" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -91,11 +91,11 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="heX-ub-ekA">
-                    <rect key="frame" x="160" y="206" width="110" height="30"/>
+                    <rect key="frame" x="160" y="206" width="101" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.31764705882352939" green="0.37254901960784315" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <state key="normal" title="Customer">
+                    <state key="normal" backgroundImage="customer_set.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -198,21 +198,24 @@
                     <rect key="frame" x="18" y="658" width="284" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="UJz-ta-NJ0"/>
                     </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0dN-R7-zQJ">
-                    <rect key="frame" x="242" y="658" width="60" height="41"/>
+                    <rect key="frame" x="247" y="658" width="55" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.30588235289999999" green="0.35686274509999999" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <state key="normal" title="SUBMIT">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="actionSubmitPostalCode:" destination="-1" eventType="touchUpInside" id="ivc-8W-lGz"/>
+                    </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Please Enter Your Current Address" minimumFontSize="17" clearButtonMode="whileEditing" id="4Ee-d0-AmD">
+                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Please Enter Your Current Address" minimumFontSize="17" clearButtonMode="whileEditing" id="4Ee-d0-AmD">
                     <rect key="frame" x="18" y="707" width="284" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -248,7 +251,7 @@
                         <outlet property="delegate" destination="-1" id="GWE-3u-dV2"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="City" minimumFontSize="17" clearButtonMode="whileEditing" id="t90-xF-CNt">
+                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="City" minimumFontSize="17" clearButtonMode="whileEditing" id="t90-xF-CNt">
                     <rect key="frame" x="18" y="854" width="135" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -257,7 +260,7 @@
                         <outlet property="delegate" destination="-1" id="HMR-FA-6eW"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="UF" minimumFontSize="17" clearButtonMode="whileEditing" id="rAJ-Dx-RrR">
+                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="UF" minimumFontSize="17" clearButtonMode="whileEditing" id="rAJ-Dx-RrR">
                     <rect key="frame" x="167" y="854" width="135" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -300,7 +303,7 @@
         <view contentMode="scaleToFill" id="1">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
@@ -308,16 +311,16 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="632"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" id="Hkm-4S-6XI">
-                    <rect key="frame" x="76" y="84" width="169" height="85"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headerLogo.png" id="DaY-Xn-pbs">
+                    <rect key="frame" x="77" y="84" width="167" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="V0r-m3-xnh">
-                    <rect key="frame" x="50" y="206" width="110" height="30"/>
+                    <rect key="frame" x="59" y="206" width="101" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.31764705879999999" green="0.37254901959999998" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <state key="normal" title="Driver">
+                    <state key="normal" backgroundImage="driver_set.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -325,11 +328,11 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="LTz-lK-Voo">
-                    <rect key="frame" x="160" y="206" width="110" height="30"/>
+                    <rect key="frame" x="160" y="206" width="101" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <state key="normal" title="Customer">
+                    <state key="normal" backgroundImage="customer.png">
                         <color key="titleColor" red="0.31764705879999999" green="0.37254901959999998" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -559,7 +562,11 @@ VUYgRXhwZWRpw6fDo28AA
     </objects>
     <resources>
         <image name="add_icon.png" width="11" height="11"/>
+        <image name="customer.png" width="101" height="29"/>
+        <image name="customer_set.png" width="101" height="29"/>
         <image name="down_arrow.png" width="13" height="12"/>
-        <image name="logo.png" width="169" height="85"/>
+        <image name="driver.png" width="101" height="29"/>
+        <image name="driver_set.png" width="101" height="29"/>
+        <image name="headerLogo.png" width="187" height="67"/>
     </resources>
 </document>

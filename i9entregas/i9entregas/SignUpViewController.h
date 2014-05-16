@@ -65,7 +65,8 @@
     
     AppDelegate *appd;
     MBProgressHUD *hud;
-    ASIFormDataRequest *requestRegisterCustomer;
+    ASIFormDataRequest *requestRegisterCustomer, *requestCarrier;
+    ASIHTTPRequest *requestGetAddress;
     NSMutableArray *arrTotalVehicles;
     UIAlertView *_alertSuccess;
 }
@@ -78,5 +79,6 @@
 - (IBAction)actionCarrierPickerCancel:(id)sender;
 - (IBAction)actionCarrierPickerDone:(id)sender;
 - (IBAction)actionAddVehicles:(id)sender;
+- (IBAction)actionSubmitPostalCode:(id)sender;
 
 @end

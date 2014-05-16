@@ -28,19 +28,27 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    _tfEmail.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"email"];
-    _tfPassword.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
-    
-    appd = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    
-    [appd setPadding:_tfEmail];
-    [appd setPadding:_tfPassword];
-    
-    [appd setGrayBgDarkBorder:_tfEmail];
-    [appd setGrayBgDarkBorder:_tfPassword];
-    
-    _btnLogin.layer.cornerRadius = 3.0f;
-    _btnSignup.layer.cornerRadius = 3.0f;
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userID"])
+    {
+        HomeViewController *homevc = [[HomeViewController alloc] init];
+        [self.navigationController pushViewController:homevc animated:YES];
+    }
+    else
+    {
+        _tfEmail.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"email"];
+        _tfPassword.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
+        
+        appd = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        [appd setPadding:_tfEmail];
+        [appd setPadding:_tfPassword];
+        
+        [appd setGrayBgDarkBorder:_tfEmail];
+        [appd setGrayBgDarkBorder:_tfPassword];
+        
+        _btnLogin.layer.cornerRadius = 3.0f;
+        _btnSignup.layer.cornerRadius = 3.0f;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -165,6 +173,7 @@
     }
     else
     {
+        [[NSUserDefaults standardUserDefaults] setObject:[json valueForKey:@"usertype"] forKey:@"UserType"];
         [[NSUserDefaults standardUserDefaults] setObject:[json valueForKey:@"message"] forKey:@"userID"];
         [[NSUserDefaults standardUserDefaults] setObject:_tfEmail.text forKey:@"email"];
         [[NSUserDefaults standardUserDefaults] setObject:_tfPassword.text forKey:@"password"];

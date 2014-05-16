@@ -101,11 +101,6 @@
 - (void)initializeVariables
 {
     arrTotalVehicles = [[NSMutableArray alloc] init];
-    
-    arrCarrier = [[NSMutableArray alloc] initWithObjects:@"Aircel",@"Airtel", nil];
-    
-    _pickerCarrier.delegate = self;
-    _pickerCarrier.dataSource = self;
 }
 
 - (IBAction)actionDriverSelected:(id)sender
@@ -118,6 +113,8 @@
 {
     _scrollViewDriver.hidden = YES;
     _scrollViewCustomer.hidden = NO;
+    
+    [self runAPICarrier];
 }
 
 - (IBAction)actionClear:(id)sender
@@ -139,6 +136,13 @@
 
             return;
         }
+    }
+    if (!(_tfCNHNumber.text.length == 11))
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"CNH Number must be of 11 digits"  delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        
+        return;
     }
     if ([_tfCarrier.text isEqualToString:@""])
     {
@@ -200,7 +204,7 @@
 {
     [self actionCarrierPickerCancel:nil];
     
-    _tfCarrier.text = [arrCarrier objectAtIndex:[_pickerCarrier selectedRowInComponent:0]];
+    _tfCarrier.text = [[arrCarrier objectAtIndex:[_pickerCarrier selectedRowInComponent:0]] valueForKey:@"carrier_name"];
 }
 
 - (IBAction)actionAddVehicles:(id)sender
@@ -256,6 +260,24 @@
     [_btnVechicleRemove addTarget:self action:@selector(actionRemoveVehicleView:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (IBAction)actionSubmitPostalCode:(id)sender
+{
+    [_tfPostalCode resignFirstResponder];
+    
+    if (!(_tfPostalCode.text.length == 8))
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Postal Code must be of 8 digits"  delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
+    else
+    {
+        _tfPostalCode.text = [_tfPostalCode.text stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        NSString *str = [NSString stringWithFormat:@"%@-%@",[_tfPostalCode.text substringToIndex:5],[_tfPostalCode.text substringFromIndex:5]];
+        
+        [self runAPIGetAddress:str];
+    }
+}
+
 - (void)actionRemoveVehicleView:(id)sender
 {
     UIView *vw = (UIView*)[sender superview];
@@ -307,6 +329,31 @@
 
 #pragma mark - API Implementation
 
+- (void)runAPICarrier
+{
+    if (arrCarrier)
+        return;
+    
+    NSString *str = [NSString stringWithFormat:@"http://i9entregas.com.br/delievery_tracking/api.php?method=carrier"];
+    requestCarrier = [[ASIFormDataRequest alloc] initWithURL:[NSURL URLWithString:str]];
+    [requestCarrier setDelegate:self];
+    [requestCarrier setTimeOutSeconds:200];
+    [requestCarrier setNumberOfTimesToRetryOnTimeout:2];
+    [requestCarrier startAsynchronous];
+}
+
+- (void)runAPIGetAddress:(NSString*)postalCode
+{
+    NSString *str1 = [NSString stringWithFormat:@"http://maps.google.com/maps/api/geocode/json?address=%@&sensor=true",postalCode];
+    NSLog(@"%@",str1);
+    
+    requestGetAddress = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:str1]];
+    [requestGetAddress setDelegate:self];
+    [requestGetAddress setTimeOutSeconds:200];
+    [requestGetAddress setNumberOfTimesToRetryOnTimeout:2];
+    [requestGetAddress startAsynchronous];
+}
+
 - (void)runAPIValidateCNHNumber
 {
     
@@ -352,7 +399,55 @@
     
     NSDictionary* json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:nil];
     
-    if ([request isEqual:requestRegisterCustomer])
+    if ([request isEqual:requestCarrier])
+    {
+        if ([[json valueForKey:@"success"] integerValue] == 0)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[json valueForKey:@"message"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+        }
+        else
+        {
+            arrCarrier = [[NSMutableArray alloc] initWithArray:[json valueForKey:@"message"]];
+            _pickerCarrier.delegate = self;
+            _pickerCarrier.dataSource = self;
+            [_pickerCarrier reloadAllComponents];
+        }
+    }
+    else if ([request isEqual:requestGetAddress])
+    {
+        NSArray *arrResults = [json valueForKey:@"results"];
+        
+        if (arrResults.count > 0)
+        {
+            NSDictionary *dict1 = [arrResults objectAtIndex:0];
+            NSArray *arrAddressComp = [dict1 valueForKey:@"address_components"];
+            
+            for (NSDictionary *dict in arrAddressComp)
+            {
+                //            NSLog(@"%@",[dict valueForKey:@"types"]);
+                
+                if ([[[dict valueForKey:@"types"] objectAtIndex:0] isEqualToString:@"administrative_area_level_2"])
+                    _tfCity.text = [dict valueForKey:@"short_name"];
+                
+                if ([[[dict valueForKey:@"types"] objectAtIndex:0] isEqualToString:@"administrative_area_level_1"])
+                    _tfUF.text = [dict valueForKey:@"short_name"];
+            }
+            
+            _tfAddress.text = [dict1 valueForKey:@"formatted_address"];
+            
+            _tfAddress.userInteractionEnabled = NO;
+            _tfCity.userInteractionEnabled = NO;
+            _tfUF.userInteractionEnabled = NO;
+        }
+        else
+        {
+            _tfAddress.userInteractionEnabled = YES;
+            _tfCity.userInteractionEnabled = YES;
+            _tfUF.userInteractionEnabled = YES;
+        }
+    }
+    else if ([request isEqual:requestRegisterCustomer])
     {
         if ([[json valueForKey:@"success"] integerValue] == 0)
         {
@@ -462,14 +557,14 @@
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     if ([pickerView isEqual:_pickerCarrier])
-        return [arrCarrier objectAtIndex:row];
+        return [[arrCarrier objectAtIndex:row] valueForKey:@"carrier_name"];
     return 0;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     if ([pickerView isEqual:_pickerCarrier])
-        _tfCarrier.text = [arrCarrier objectAtIndex:row];
+        _tfCarrier.text = [[arrCarrier objectAtIndex:row] valueForKey:@"carrier_name"];
 }
 
 #pragma mark - UIAlertView Delegate
@@ -490,7 +585,7 @@
     }
     else if ([alertView isEqual:_alertSuccess])
     {
-        if (buttonIndex == 1)
+        if (buttonIndex == 0)
         {
             [self.navigationController popToRootViewControllerAnimated:YES];
         }

@@ -33,12 +33,36 @@
     IBOutlet UITextField *_tfDCity;
     IBOutlet UITextField *_tfDUF;
     
+    IBOutlet UIView *_viewDatePicker;
+    
+    IBOutlet UIDatePicker *_pickerDate;
+    
+    IBOutlet UIView *_viewTimePicker;
+    
+    IBOutlet UIDatePicker *_pickerTime;
+    
+    IBOutlet UIButton *_btnDate;
+    IBOutlet UIButton *_btnTime;
+    IBOutlet UIButton *_btnLimitDate;
+    IBOutlet UIButton *_btnLimitTime;
+    
     AppDelegate *appd;
+    ASIHTTPRequest *requestGetAddress;
+    MBProgressHUD *hud;
+    NSString *strCurrentRequest;
+    UITextField *activeTextField;
 }
+
 - (IBAction)actionOSubmit:(id)sender;
 - (IBAction)actionDSubmit:(id)sender;
 
 - (IBAction)actionSubmit:(id)sender;
 - (IBAction)actionClear:(id)sender;
+- (IBAction)actionPickerDateCancel:(id)sender;
+- (IBAction)actionPickerDateDone:(id)sender;
+- (IBAction)actionPickerTimeCancel:(id)sender;
+- (IBAction)actionPickerTimeDone:(id)sender;
+- (IBAction)actionOpenDatePicker:(id)sender;
+- (IBAction)actionOpenTimePicker:(id)sender;
 
 @end

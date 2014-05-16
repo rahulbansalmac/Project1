@@ -11,6 +11,8 @@
 #import "ASIFormDataRequest.h"
 #import "MBProgressHUD.h"
 #import "AppDelegate.h"
+#import "NewRequestViewController.h"
+#import "SideViewController.h"
 
 @interface OpenRequestViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {

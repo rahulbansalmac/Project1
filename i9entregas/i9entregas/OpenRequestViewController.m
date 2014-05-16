@@ -29,12 +29,13 @@
     // Do any additional setup after loading the view from its nib.
     
     self.navigationItem.hidesBackButton = NO;
-    self.navigationItem.title = @"Open Request";
     self.navigationController.navigationBarHidden = NO;
     self.navigationController.navigationBar.translucent = YES;
     
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:107.0/255.0 green:112.0/255.0 blue:115.0/255.0 alpha:1.0];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:247.0/255.0 green:247.0/255.0 blue:247.0/255.0 alpha:1.0];
+    
+    [self createCustomLeftBarButton];
     
     [self createCustomRightBarButton];
     
@@ -42,6 +43,11 @@
     _tableView.delegate = self;
     
     [self runAPIGetRequest];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.navigationItem.title = @"Open Request";
 }
 
 - (void)createCustomRightBarButton
@@ -52,14 +58,35 @@
     button.titleLabel.textAlignment = NSTextAlignmentRight;
     button.titleLabel.font = [UIFont systemFontOfSize:13.0f];
     [button setTitle:NSLocalizedString(@"New\nRequest", nil) forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(actionNewRequest) forControlEvents:UIControlEventTouchUpInside];
     [button sizeToFit];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
-- (void)flipView
+- (void)createCustomLeftBarButton
 {
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *buttonImage = [UIImage imageNamed:@"side_menu"];
+    button.frame = CGRectMake(0, 0, 28, 20);
+    [button setImage:buttonImage forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(actionSlide) forControlEvents:UIControlEventTouchUpInside];
+    [button sizeToFit];
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+}
+
+- (void)actionSlide
+{
+    SideViewController *sideView = [[SideViewController alloc] initWithNibName:@"SideViewController" bundle:nil ];
+    [self.revealSideViewController pushViewController:sideView onDirection:PPRevealSideDirectionLeft withOffset:150.0 animated:YES];
+    PP_RELEASE(sideView);
+}
+
+- (void)actionNewRequest
+{
+    NewRequestViewController *newreq = [[NewRequestViewController alloc] init];
+    [self.navigationController pushViewController:newreq animated:YES];
 }
 
 #pragma mark - API Implementation

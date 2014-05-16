@@ -20,8 +20,20 @@
 
 @interface HomeViewController : UIViewController
 {
-    PPRevealSideViewController *_revealSideViewController;
+    AppDelegate *appd;
 }
+
+@property (nonatomic, strong) UINavigationController *navc1;
+@property (nonatomic, strong) UINavigationController *navc2;
+@property (nonatomic, strong) UINavigationController *navc3;
+@property (nonatomic, strong) UINavigationController *navc4;
+@property (nonatomic, strong) UINavigationController *navc5;
+
+@property (nonatomic, strong) PPRevealSideViewController *_revealSideViewController1;
+@property (nonatomic, strong) PPRevealSideViewController *_revealSideViewController2;
+@property (nonatomic, strong) PPRevealSideViewController *_revealSideViewController3;
+@property (nonatomic, strong) PPRevealSideViewController *_revealSideViewController4;
+@property (nonatomic, strong) PPRevealSideViewController *_revealSideViewController5;
 
 - (IBAction)actionOpenRequest:(id)sender;
 - (IBAction)actionMyRequest:(id)sender;
